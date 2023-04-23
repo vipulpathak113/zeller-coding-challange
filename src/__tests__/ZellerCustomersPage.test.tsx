@@ -53,7 +53,7 @@ describe("CustomersPage", () => {
       expect(screen.queryByText("Test2")).not.toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByText("MANAGER"));
+    fireEvent.click(screen.getByText("Manager"));
     waitFor(() => {
       expect(screen.queryByText("Test1")).not.toBeInTheDocument();
     });

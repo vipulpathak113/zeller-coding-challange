@@ -1,4 +1,8 @@
+
+
+/* eslint-disable react-hooks/rules-of-hooks */
 import styled from "styled-components";
+import { useCaptalizeFirstLetter } from "../hooks/useCaptalizeFirstLetter";
 
 interface Customer {
   email: string;
@@ -47,16 +51,18 @@ const SquareBox = styled.div`
 
 const CustomerInitial = styled.span`
   font-size: 18px;
-  text-transform: uppercase;
 `;
-export const ZellerCustomersList: React.FC<CustomersListProps> = ({
-  customers,
-}) => (
-  <Section aria-labelledby="customer-list">
-    <h2 id="customer-list">Admin Users</h2>
-    <CustomerList>
-      {customers &&
-        customers.map((customer) => (
+export function ZellerCustomersList({ customers }: CustomersListProps) {
+  const capitalizedCustomers = customers && customers.map((customer) => ({
+    ...customer,
+    role: useCaptalizeFirstLetter(customer.role),
+  }));
+
+  return (
+    <Section aria-labelledby="customer-list">
+      <h2 id="customer-list">Admin Users</h2>
+      <CustomerList>
+        {capitalizedCustomers && capitalizedCustomers.map((customer) => (
           <CustomerListItem key={customer.id}>
             <SquareBox>
               <CustomerInitial>{customer.name[0]}</CustomerInitial>
@@ -68,6 +74,7 @@ export const ZellerCustomersList: React.FC<CustomersListProps> = ({
             </div>
           </CustomerListItem>
         ))}
-    </CustomerList>
-  </Section>
-);
+      </CustomerList>
+    </Section>
+  );
+}

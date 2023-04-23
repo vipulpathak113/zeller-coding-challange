@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import styled from "styled-components";
+import { useCaptalizeFirstLetter } from "../hooks/useCaptalizeFirstLetter";
 
 interface labelProps {
   selected: boolean;
@@ -27,20 +29,26 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
   roles,
   selectedRole,
   onRoleChange,
-}) => (
-  <Section aria-labelledby="role-selection">
-    <h2 id="role-selection">User Types:</h2>
-    {roles.map((role) => (
-      <RoleLabel key={role} selected={selectedRole === role}>
-        <input
-          type="radio"
-          name="role"
-          value={role}
-          checked={selectedRole === role}
-          onChange={() => onRoleChange(role)}
-        />
-        {role}
-      </RoleLabel>
-    ))}
-  </Section>
-);
+}) => {
+  const capitalizedRoles = roles && roles.map(useCaptalizeFirstLetter);
+  return (
+    <Section aria-labelledby="role-selection">
+      <h2 id="role-selection">User Types:</h2>
+      {capitalizedRoles && capitalizedRoles.map((role) => (
+        <RoleLabel
+          key={role}
+          selected={selectedRole.toLowerCase() === role.toLowerCase()}
+        >
+          <input
+            type="radio"
+            name="role"
+            value={role}
+            checked={selectedRole.toLowerCase() === role.toLowerCase()}
+            onChange={() => onRoleChange(role.toUpperCase())}
+          />
+          {role}
+        </RoleLabel>
+      ))}
+    </Section>
+  );
+};

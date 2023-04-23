@@ -11,8 +11,8 @@ describe("RoleSelector", () => {
         onRoleChange={() => {}}
       />
     );
-    expect(screen.getByText("ADMIN")).toBeInTheDocument();
-    expect(screen.getByText("MANAGER")).toBeInTheDocument();
+    expect(screen.getByText("Admin")).toBeInTheDocument();
+    expect(screen.getByText("Manager")).toBeInTheDocument();
   });
   it("calls onRoleChange when role is clicked", () => {
     const roles = ["ADMIN", "MANAGER"];
@@ -24,7 +24,7 @@ describe("RoleSelector", () => {
         onRoleChange={onRoleChange}
       />
     );
-    fireEvent.click(screen.getByText("MANAGER"));
+    fireEvent.click(screen.getByText("Manager"));
     expect(onRoleChange).toHaveBeenCalledWith("MANAGER");
   });
 });

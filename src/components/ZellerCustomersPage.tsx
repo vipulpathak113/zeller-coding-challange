@@ -20,12 +20,12 @@ interface Customer {
 
 const ZellerCustomersPage: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<string>("ADMIN");
-  const { loading, error, data } = useCustomers(selectedRole);
+  const { loading, error, data } = useCustomers();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const roles = ["ADMIN", "MANAGER"];
+  const roles = [...new Set (data && data.map((customer: Customer)=>customer.role))].sort() as string[] ;
   const filteredCustomers =
     data && data.filter((customer: Customer) => customer.role === selectedRole);
 

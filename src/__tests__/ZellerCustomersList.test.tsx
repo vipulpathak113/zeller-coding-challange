@@ -9,8 +9,8 @@ describe("CustomersList", () => {
     ];
     render(<ZellerCustomersList customers={customers} />);
     expect(screen.getByText("Test1")).toBeInTheDocument();
-    expect(screen.getByText("ADMIN")).toBeInTheDocument();
+    expect(screen.getByText("Admin")).toBeInTheDocument();
     expect(screen.getByText("Test2")).toBeInTheDocument();
-    expect(screen.getByText("MANAGER")).toBeInTheDocument();
+    expect(screen.getByText("Manager")).toBeInTheDocument();
   });
 });

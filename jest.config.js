@@ -1,39 +1,21 @@
 module.exports = {
-    roots: [
-      '<rootDir>/src'
-    ],
-    collectCoverageFrom: [
-      'src/**/*.{js,jsx,ts,tsx}',
-      '!src/**/*.d.ts'
-    ],
-    setupFilesAfterEnv: [
-      '<rootDir>/setupTests.js'
-    ],
-    testMatch: [
-      '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
-      '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}'
-    ],
-    testEnvironment: 'jsdom',
-    transform: {
-      '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': '<rootDir>/jest/transforms/babelTransform.js',
-      '^.+\\.css$': '<rootDir>/jest/transforms/cssTransform.js',
-      '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)': '<rootDir>/jest/transforms/fileTransform.js'
+    testEnvironment: "jsdom",
+    preset: "ts-jest",
+    moduleDirectories: ["node_modules"],
+    setupFilesAfterEnv: ["@testing-library/jest-dom"],
+    testEnvironmentOptions: {
+      browsers: ["chrome", "firefox", "safari"],
     },
-    transformIgnorePatterns: [
-      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
-      '^.+\\.module\\.(css|sass|scss)$'
-    ],
-    modulePaths: [],
-    moduleFileExtensions: [
-      'web.js',
-      'js',
-      'web.ts',
-      'ts',
-      'web.tsx',
-      'tsx',
-      'json',
-      'web.jsx',
-      'jsx',
-      'node'
-    ],
+    verbose: true,
+    transform: {
+      "^.+\\.(ts|tsx|js|jsx)$": "ts-jest",
+    },
+  coverageThreshold: {
+    global: {
+      branches: 20,
+      functions: 20,
+      lines: 20,
+      statements: 20,
+    },
+  },
   }
